@@ -1,0 +1,11 @@
+{
+  "name": "beerToolbox",
+  "version": "1.0.0",
+  "main": "beerToolbox.js",
+  "ignore": [
+    "app"
+  ],
+  "dependencies": {
+    "angular": "1.x.x"
+  }
+}

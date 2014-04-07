@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Beer</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script type="text/javascript" src="../beerToolbox.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/ctrl.js"></script>
+    
+</head>
+<body ng-app="myApp" ng-controller="mainCtrl">
+    <h1>{{title}}</h1>
+    <label>Volume (L): </label><input type="text" ng-model="volume" />
+    <ul>
+        <li ng-repeat="(name, malt) in malts">{{name}} ({{malt.mass}} kg) : {{malt.yield_m*100 | number:0}}%</li>
+    </ul>
+    <div>
+        <label>Name: </label>
+        <input type="text" ng-model="currentMaltName" size=10 />
+        <label>Mass (kg): </label>
+        <input type="text" ng-model="currentMaltMass" size=2 />
+        <label>Yield (%): </label>
+        <input type="text" ng-model="currentMaltYield" size=2 />
+        <button ng-show="currentMaltName.length>0" ng-click="add()">Add</button>
+    </div>
+    <br/>
+    <div>
+        <label>alcohol: </label>{{result.alcohol | number:1}}%vol<br />
+        <label>plato: </label>{{result.platoGravity | number:1}}<br />
+        <label>brix: </label>{{result.brixGravity | number:1}}<br />
+        <label>Specific: </label>{{result.specificGravity | number:3}}<br />
+        <label>Residual: </label>{{result.residualGravity | number:3}}<br />
+    </div>
+    
+</body>
+    
