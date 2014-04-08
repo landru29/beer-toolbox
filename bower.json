@@ -1,6 +1,5 @@
 {
-  "name": "beerToolbox",
-  "version": "1.0.0",
+  "name": "beer-toolbox",
   "main": "beerToolbox.js",
   "ignore": [
     "app"
