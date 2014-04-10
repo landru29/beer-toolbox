@@ -166,6 +166,40 @@
             }
         });
     })
+
+    .provider('beerCatalog', ['$http', function($http) {
+        this.$get = function() {
+            return {
+                loadSources = function() {
+                    var data={};
+                    for (var index in this.sources) {
+                        $http.get(this.source[index])
+                           .then(function(res){
+                              data[index] = res.data;                
+                            });
+                    }
+                    
+                }
+            };
+        };
+
+        this.sources = [];
+
+        this.addSource = function(sourceFilename) {
+            this.source.push(sourceFilename);
+        };
+
+        this.getSources = function() {
+            return this.sources;
+        };
+
+        this.removeSource = function(sourceFilename) {
+            var index = array.indexOf(sourceFilename);
+            if (index > -1) {
+                array.splice(index, 1);
+            }
+        };
+    }])
     
     .factory('beerSugar', ['polynomial', function(polynomial) {
 
