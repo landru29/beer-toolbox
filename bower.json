@@ -1,6 +1,6 @@
 {
   "name": "beer-toolbox",
-  "main": "beerToolbox.js",
+  "main": "dist/beer-toolbox.js",
   "ignore": [
     "app"
   ],

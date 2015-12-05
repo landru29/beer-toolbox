@@ -1,0 +1,34 @@
+{
+    "name": "beer-toolbox",
+    "version": "1.0.0",
+    "description": "Beer Toolbox",
+    "main": "dist/beer-toolbox.min.js",
+    "scripts": {
+        "test": "grunt test"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "matchdep": "0.3.0",
+        "grunt": "~0.4.0",
+        "grunt-contrib-jshint": "0.10.0",
+        "grunt-contrib-clean": "0.6.0",
+        "grunt-contrib-copy": "0.7.0",
+        "grunt-wiredep": "1.8.0",
+        "grunt-contrib-uglify": "0.7.0",
+        "grunt-contrib-concat": "0.5.0",
+        "grunt-ng-annotate": "1.0.1",
+        "grunt-ng-constant": "1.1.0",
+        "grunt-karma": "0.10.1",
+        "karma": "0.12.31",
+        "karma-jasmine": "0.3.5",
+        "karma-phantomjs-launcher": "0.1.4",
+        "jasmine-core": "^2.1.2",
+        "lodash": "3.10.1",
+        "grunt-ngdocs": "git+https://github.com/landru29/grunt-ngdocs.git"
+    }
+}

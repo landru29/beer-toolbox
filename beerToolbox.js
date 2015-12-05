@@ -340,25 +340,23 @@
         /**
          * Compute the quantity of sugar produces from the malts
          * 
-         * @param object malts           malts description 
-         *     {
-         *       pilsen: {
+         * @param {Array} malts           malts description 
+         *     [
+         *       {
          *         mass: 1,    // in kilo
          *         yield_m:0.78  // between 0 and 1
          *       }, 
-         *       cristal: {
+         *       {
          *         mass: 2,
          *         yield_m:0.75
          *       }
-         *     }
+         *     ]
          * @param float globalEfficiency global efficiency of the extraction (default 0.75)
          * 
          * @return float
          **/ 
         var producedSugar = function(malts, globalEfficiency) {
-            if ('undefined' === typeof globalEfficiency) {
-                globalEfficiency = 0.75;
-            }
+            globalEfficiency = ('undefined' === typeof globalEfficiency)  ? 0.75 : globalEfficiency
             var producedSugarPerMalt = function(mass, yield_m, globalEfficiency) {
                 return mass * yield_m * globalEfficiency;
             };
