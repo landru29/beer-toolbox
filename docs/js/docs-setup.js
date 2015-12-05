@@ -28,7 +28,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "BeerToolbox",
       "shortDescription": "Units conversions",
-      "keywords": "acidity alpha alphaacidity api availablemethods beer beertoolbox boiling compute computing conversions data flowers grams gravity gravitysg hop hops ibu lastingmin liquid liquide list liter mass massgr method methods pellets percent service sg specific type units volume volumel"
+      "keywords": "acidity alpha alphaacidity api availablemethods beer beertoolbox boiling compute computing conversions data decimals flowers grams gravity gravitysg hop hops ibu lastingmin liquid liquide list liter mass massgr method methods options pellets percent precision service sg specific time type units volume volumel"
     },
     {
       "section": "api",
@@ -37,7 +37,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "BeerToolbox",
       "shortDescription": "Perform basic operations on a polynome, including solve",
-      "keywords": "a0 a1 a2 a3 api basic beertoolbox direct equation including inject invert method operations pass perform polynome polynomeobj service set solution solutions solve"
+      "keywords": "a0 a1 a2 a3 api basic beertoolbox direct equation including inject invert method operations pass perform polynome polynomeobj service set solution solutions solve solveeq"
     },
     {
       "section": "api",

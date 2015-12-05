@@ -1,4 +1,4 @@
-<a href="/src/beer-sugar.service.js#8" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">BeerSugar</code>
+<a href="/src/beer-sugar.service.js#33" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">BeerSugar</code>
 <div><span class="hint">service in module <code ng:non-bindable="">BeerToolbox</code>
 </span>
 </div>
@@ -7,19 +7,19 @@
 <div class="description"><div class="beertoolbox-beersugar-page"><p>Compute Sugars</p>
 </div></div>
 <div class="member method"><h2 id="methods">Methods</h2>
-<ul class="methods"><li><a href="/src/beer-sugar.service.js#255" class="view-source icon-eye-open"> </a><h3 id="methods_alcoholtosg">alcoholToSg(alcohol)</h3>
+<ul class="methods"><li><a href="/src/beer-sugar.service.js#280" class="view-source icon-eye-open"> </a><h3 id="methods_alcoholtosg">alcoholToSg(alcohol)</h3>
 <div class="alcoholtosg"><div class="alcoholtosg-page"><p>Convert alcohol to specific gravity</p>
 </div><h5 id="methods_alcoholtosg_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>alcohol</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="alcoholtosg-page"><p>rate (10 for 10%)</p>
 </div></td></tr></tbody></table><h5 id="methods_alcoholtosg_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="alcoholtosg-page"><p>Specific gravity</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#173" class="view-source icon-eye-open"> </a><h3 id="methods_brixtosg">brixToSg(brix)</h3>
+<li><a href="/src/beer-sugar.service.js#198" class="view-source icon-eye-open"> </a><h3 id="methods_brixtosg">brixToSg(brix)</h3>
 <div class="brixtosg"><div class="brixtosg-page"><p>Convert Brix gravity to specific gravity</p>
 </div><h5 id="methods_brixtosg_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>brix</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="brixtosg-page"><p>gravity (for 10%, enter 10)</p>
 </div></td></tr></tbody></table><h5 id="methods_brixtosg_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="brixtosg-page"><p>Specific gravity</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#37" class="view-source icon-eye-open"> </a><h3 id="methods_densitycorrection">densityCorrection(measuredGravity, measuredTemp, calibrationTemp)</h3>
+<li><a href="/src/beer-sugar.service.js#62" class="view-source icon-eye-open"> </a><h3 id="methods_densitycorrection">densityCorrection(measuredGravity, measuredTemp, calibrationTemp)</h3>
 <div class="densitycorrection"><div class="densitycorrection-page"><p>Compute the corrected density</p>
 </div><h5 id="methods_densitycorrection_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>measuredGravity</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="densitycorrection-page"><p>measured specific gravity</p>
 </div></td></tr><tr><td>measuredTemp</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="densitycorrection-page"><p>temperature in celcius during measurement</p>
@@ -27,7 +27,7 @@
 </div></td></tr></tbody></table><h5 id="methods_densitycorrection_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="densitycorrection-page"><p>Specific gravity</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#294" class="view-source icon-eye-open"> </a><h3 id="methods_diluatesugar">diluateSugar(volume, sugar, residualRate)</h3>
+<li><a href="/src/beer-sugar.service.js#319" class="view-source icon-eye-open"> </a><h3 id="methods_diluatesugar">diluateSugar(volume, sugar, residualRate)</h3>
 <div class="diluatesugar"><div class="diluatesugar-page"><p>Compute the densities as a result of the dilution of sugar un a volume of liquide</p>
 </div><h5 id="methods_diluatesugar_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>volume</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="diluatesugar-page"><p>volume of the liquide in liter</p>
 </div></td></tr><tr><td>sugar</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="diluatesugar-page"><p>the amount of sugar in kilo</p>
@@ -36,14 +36,14 @@ the final gravity will be 1.020</p>
 </div></td></tr></tbody></table><h5 id="methods_diluatesugar_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="diluatesugar-page"><p>Densities</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#112" class="view-source icon-eye-open"> </a><h3 id="methods_grainretention">grainRetention(grainMass, ratio)</h3>
+<li><a href="/src/beer-sugar.service.js#137" class="view-source icon-eye-open"> </a><h3 id="methods_grainretention">grainRetention(grainMass, ratio)</h3>
 <div class="grainretention"><div class="grainretention-page"><p>Compute the volume of water lost in the grain</p>
 </div><h5 id="methods_grainretention_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>grainMass</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="grainretention-page"><p>quantity of malt in kg</p>
 </div></td></tr><tr><td>ratio</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="grainretention-page"><p>retention ratio (default 1)</p>
 </div></td></tr></tbody></table><h5 id="methods_grainretention_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="grainretention-page"><p>Volume of water</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#76" class="view-source icon-eye-open"> </a><h3 id="methods_gravitydilution">gravityDilution(initialVolume, gravity, additionalVolume, additionalGravity)</h3>
+<li><a href="/src/beer-sugar.service.js#101" class="view-source icon-eye-open"> </a><h3 id="methods_gravitydilution">gravityDilution(initialVolume, gravity, additionalVolume, additionalGravity)</h3>
 <div class="gravitydilution"><div class="gravitydilution-page"><p>Compute the gravity after dilution or evaporation</p>
 </div><h5 id="methods_gravitydilution_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>initialVolume</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="gravitydilution-page"><p>Volume before dilution in liter</p>
 </div></td></tr><tr><td>gravity</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="gravitydilution-page"><p>Specific gravity of the initial volume</p>
@@ -52,7 +52,7 @@ the final gravity will be 1.020</p>
 </div></td></tr></tbody></table><h5 id="methods_gravitydilution_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="gravitydilution-page"><p>Specific gravity</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#56" class="view-source icon-eye-open"> </a><h3 id="methods_gravitytoalcohol">gravityToAlcohol(initialGravity, finalGravity, additionalSugar)</h3>
+<li><a href="/src/beer-sugar.service.js#81" class="view-source icon-eye-open"> </a><h3 id="methods_gravitytoalcohol">gravityToAlcohol(initialGravity, finalGravity, additionalSugar)</h3>
 <div class="gravitytoalcohol"><div class="gravitytoalcohol-page"><p>Compute the alcohol in percentage volume</p>
 </div><h5 id="methods_gravitytoalcohol_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>initialGravity</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="gravitytoalcohol-page"><p>gravity before fermentation</p>
 </div></td></tr><tr><td>finalGravity</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="gravitytoalcohol-page"><p>gravity after fermentation</p>
@@ -60,20 +60,20 @@ the final gravity will be 1.020</p>
 </div></td></tr></tbody></table><h5 id="methods_gravitytoalcohol_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="gravitytoalcohol-page"><p>Alcohol rate</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#95" class="view-source icon-eye-open"> </a><h3 id="methods_mashingvolume">mashingVolume(grainMass, ratio)</h3>
+<li><a href="/src/beer-sugar.service.js#120" class="view-source icon-eye-open"> </a><h3 id="methods_mashingvolume">mashingVolume(grainMass, ratio)</h3>
 <div class="mashingvolume"><div class="mashingvolume-page"><p>Compute the volume of water to add to the malt</p>
 </div><h5 id="methods_mashingvolume_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>grainMass</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="mashingvolume-page"><p>quantity of malt in kg</p>
 </div></td></tr><tr><td>ratio</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="mashingvolume-page"><p>mashing ratio (default 3)</p>
 </div></td></tr></tbody></table><h5 id="methods_mashingvolume_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="mashingvolume-page"><p>Volume of water</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#206" class="view-source icon-eye-open"> </a><h3 id="methods_platotosg">platoToSg(plato)</h3>
+<li><a href="/src/beer-sugar.service.js#231" class="view-source icon-eye-open"> </a><h3 id="methods_platotosg">platoToSg(plato)</h3>
 <div class="platotosg"><div class="platotosg-page"><p>Convert plato gravity to specific gravity</p>
 </div><h5 id="methods_platotosg_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>plato</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="platotosg-page"><p>gravity (for 10%, enter 10)</p>
 </div></td></tr></tbody></table><h5 id="methods_platotosg_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="platotosg-page"><p>Specific gravity</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#154" class="view-source icon-eye-open"> </a><h3 id="methods_producessugar">producesSugar(malts, globalEfficiency)</h3>
+<li><a href="/src/beer-sugar.service.js#179" class="view-source icon-eye-open"> </a><h3 id="methods_producessugar">producesSugar(malts, globalEfficiency)</h3>
 <div class="producessugar"><div class="producessugar-page"><p>Compute the quantity of sugar produces from the malts</p>
 </div><h5 id="methods_producessugar_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>malts</td><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="producessugar-page"><p>Set of malts<pre class="prettyprint linenums">
 [{
@@ -84,32 +84,32 @@ the final gravity will be 1.020</p>
 </div></td></tr></tbody></table><h5 id="methods_producessugar_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="producessugar-page"><p>Sugar mass</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#272" class="view-source icon-eye-open"> </a><h3 id="methods_sgtoalcohol">sgToAlcohol(initialSg, finalSg)</h3>
+<li><a href="/src/beer-sugar.service.js#297" class="view-source icon-eye-open"> </a><h3 id="methods_sgtoalcohol">sgToAlcohol(initialSg, finalSg)</h3>
 <div class="sgtoalcohol"><div class="sgtoalcohol-page"><p>Convert specific gravity to alcohol rate</p>
 </div><h5 id="methods_sgtoalcohol_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>initialSg</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtoalcohol-page"><p>initial specific gravity</p>
 </div></td></tr><tr><td>finalSg</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtoalcohol-page"><p>specific gravity after fermentation (default: attenuation 25%)</p>
 </div></td></tr></tbody></table><h5 id="methods_sgtoalcohol_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtoalcohol-page"><p>Alcohol rate</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#238" class="view-source icon-eye-open"> </a><h3 id="methods_sgtoalcohol">sgToAlcohol(sg)</h3>
+<li><a href="/src/beer-sugar.service.js#263" class="view-source icon-eye-open"> </a><h3 id="methods_sgtoalcohol">sgToAlcohol(sg)</h3>
 <div class="sgtoalcohol"><div class="sgtoalcohol-page"><p>Convert specific gravity to alcohol rate</p>
 </div><h5 id="methods_sgtoalcohol_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>sg</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtoalcohol-page"><p>specific gravity</p>
 </div></td></tr></tbody></table><h5 id="methods_sgtoalcohol_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtoalcohol-page"><p>Alcohol rate</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#190" class="view-source icon-eye-open"> </a><h3 id="methods_sgtobrix">sgToBrix(sg)</h3>
+<li><a href="/src/beer-sugar.service.js#215" class="view-source icon-eye-open"> </a><h3 id="methods_sgtobrix">sgToBrix(sg)</h3>
 <div class="sgtobrix"><div class="sgtobrix-page"><p>Convert specific gravity to brix gravity</p>
 </div><h5 id="methods_sgtobrix_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>sg</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtobrix-page"><p>specific gravity</p>
 </div></td></tr></tbody></table><h5 id="methods_sgtobrix_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtobrix-page"><p>Brix gravity</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#222" class="view-source icon-eye-open"> </a><h3 id="methods_sgtoplato">sgToPlato(sg)</h3>
+<li><a href="/src/beer-sugar.service.js#247" class="view-source icon-eye-open"> </a><h3 id="methods_sgtoplato">sgToPlato(sg)</h3>
 <div class="sgtoplato"><div class="sgtoplato-page"><p>Convert specific gravity to brix gravity</p>
 </div><h5 id="methods_sgtoplato_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>sg</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtoplato-page"><p>specific gravity</p>
 </div></td></tr></tbody></table><h5 id="methods_sgtoplato_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="sgtoplato-page"><p>Plato gravity</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/beer-sugar.service.js#130" class="view-source icon-eye-open"> </a><h3 id="methods_volumetoboil">volumeToBoil(finalVolume, ratioLossBoiling, rationLossCooling)</h3>
+<li><a href="/src/beer-sugar.service.js#155" class="view-source icon-eye-open"> </a><h3 id="methods_volumetoboil">volumeToBoil(finalVolume, ratioLossBoiling, rationLossCooling)</h3>
 <div class="volumetoboil"><div class="volumetoboil-page"><p>Compute the volume to boil to reach a final expected volume</p>
 </div><h5 id="methods_volumetoboil_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>finalVolume</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="volumetoboil-page"><p>expected volume at the end of the operation (in liter)</p>
 </div></td></tr><tr><td>ratioLossBoiling</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="volumetoboil-page"><p>loss ratio during boiling operation (default 10%)</p>

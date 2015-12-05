@@ -1,3 +1,27 @@
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
 /** 
  * @ngdoc service
  * @name BeerToolbox.Polynome
@@ -27,7 +51,7 @@ angular.module('BeerToolbox').service('Polynome', function(){
     var Polynome = function(polynomeObj) {
         var self = this;
         this.polynomeObj = {};
-        var degrees = [];
+        var degrees = [0];
         Object.keys(polynomeObj).forEach(function(key) {
             var matcher = key.match(/[a-zA-Z_\.\-]*(\d+)/);
             if (matcher) {
@@ -36,12 +60,12 @@ angular.module('BeerToolbox').service('Polynome', function(){
                 self.polynomeObj[degree] = parseFloat(polynomeObj[key]);
             }
         });
-        this.size = Math.max.apply(degrees);
+        this.size = Math.max.apply(null, degrees) + 1;
     };
     
     /**
      * @ngdoc method
-     * @name solve
+     * @name solveEq
      * @methodOf BeerToolbox.Polynome
      * @module BeerToolbox
      * @description
@@ -57,16 +81,16 @@ angular.module('BeerToolbox').service('Polynome', function(){
      * 
      * @return {Array} Set of solutions
      **/
-    Polynome.prototype.solve = function(value) {
+    Polynome.prototype.solveEq = function(value) {
         switch (this.size) {
             case 1:
                 return [];
             case 2:
-                return firstDegree(polynomeObj, value);
+                return firstDegree(this.polynomeObj, value);
             case 3:
-                return secondDegree(polynomeObj, value);
+                return secondDegree(this.polynomeObj, value);
             case 4:
-                return thirdDegree(polynomeObj, value);
+                return thirdDegree(this.polynomeObj, value);
             default:
                 return [];
         }
@@ -78,12 +102,12 @@ angular.module('BeerToolbox').service('Polynome', function(){
      * @methodOf BeerToolbox.Polynome
      * @module BeerToolbox
      * @description
-     * Solve th polynome
+     * Solve the polynome
      * @param   {Integer|float} value Value to pass to the polynome
      * @returns {Float} Solution
      */
     Polynome.prototype.invert = function(value){
-        var result = this.solve(value);
+        var result = this.solveEq(value);
         return result.length ? result[0] : null;
     };
     
@@ -100,8 +124,8 @@ angular.module('BeerToolbox').service('Polynome', function(){
     Polynome.prototype.direct = function(value) {
         var self = this;
         var result = 0;
-        Object.key(this.polynomeObj).forEach(function(degree) {
-            result += self.polynomeObj[dregree] * Math.pow(value, degree);
+        Object.keys(this.polynomeObj).forEach(function(degree) {
+            result += self.polynomeObj[degree] * Math.pow(value, degree);
         });
         return result;
     };
@@ -114,9 +138,9 @@ angular.module('BeerToolbox').service('Polynome', function(){
      * 
      * @return {Array}
      **/ 
-    var firstDegre = function(polynomeObj, value) {
-        if (polynomeObj[1] !== 0) {
-            return [(value - polynomeObj[0]) / polynomeObj[1]];
+    var firstDegree = function(polynomeObj, value) {
+        if (polynomeObj[1]) {
+            return [(value - (polynomeObj[0] ? polynomeObj[0] : 0)) / polynomeObj[1]];
         } else {
             return [];
         }
@@ -130,7 +154,7 @@ angular.module('BeerToolbox').service('Polynome', function(){
      * 
      * @return {Array}
      **/ 
-    var secondDegre = function(polynomeObj, value) {
+    var secondDegree = function(polynomeObj, value) {
         var delta = Math.pow(polynomeObj[1], 2) - 4 *(polynomeObj[0] - value) * polynomeObj[2];
         if (delta<0) {
             return [];

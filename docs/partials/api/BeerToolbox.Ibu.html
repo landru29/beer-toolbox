@@ -1,4 +1,4 @@
-<a href="/src/ibu.service.js#8" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">Ibu</code>
+<a href="/src/ibu.service.js#32" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">Ibu</code>
 <div><span class="hint">service in module <code ng:non-bindable="">BeerToolbox</code>
 </span>
 </div>
@@ -7,12 +7,12 @@
 <div class="description"><div class="beertoolbox-ibu-page"><p>Units conversions</p>
 </div></div>
 <div class="member method"><h2 id="methods">Methods</h2>
-<ul class="methods"><li><a href="/src/ibu.service.js#43" class="view-source icon-eye-open"> </a><h3 id="methods_availablemethods">availableMethods()</h3>
+<ul class="methods"><li><a href="/src/ibu.service.js#67" class="view-source icon-eye-open"> </a><h3 id="methods_availablemethods">availableMethods()</h3>
 <div class="availablemethods"><div class="availablemethods-page"><p>List of methods to compute IBU</p>
 </div><h5 id="methods_availablemethods_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="availablemethods-page"><p>List of methods to compute IBU</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/ibu.service.js#69" class="view-source icon-eye-open"> </a><h3 id="methods_compute">compute(method, data)</h3>
+<li><a href="/src/ibu.service.js#97" class="view-source icon-eye-open"> </a><h3 id="methods_compute">compute(method, data, options)</h3>
 <div class="compute"><div class="compute-page"><p>Compute IBU</p>
 </div><h5 id="methods_compute_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>method</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="compute-page"><p>Computing method</p>
 </div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="compute-page"><p>Beer data <pre class="prettyprint linenums">
@@ -22,7 +22,11 @@
     massGr: 50,      // mass of the hop in grams
     volumeL: 30,     // volume of liquid in liter
     gravitySg: 1.05, // specific gravity of the liquid in Sg
-    lastingMin: 60,  //time during which the hops is in the boiling liquide
+    lastingMin: 60   // time during which the hops is in the boiling liquide
+}</pre>
+</div></td></tr><tr><td>options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="compute-page"><p>Options <pre class="prettyprint linenums">
+{
+    precision: 2, // 2 decimals
 }</pre>
 </div></td></tr></tbody></table><h5 id="methods_compute_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="compute-page"><p>Ibu</p>
 </div></td></tr></table></div>

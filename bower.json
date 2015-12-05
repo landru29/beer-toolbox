@@ -1,10 +1,12 @@
 {
+  "version": "1.0.0",
   "name": "beer-toolbox",
-  "main": "dist/beer-toolbox.js",
+  "main": "dist/beer-toolbox.min.js",
   "ignore": [
     "app"
   ],
   "dependencies": {
-    "angular": "1.x.x"
+    "angular": "1.4.8",
+    "angular-mocks": "1.4.8"
   }
 }

@@ -1,4 +1,4 @@
-<a href="/src/polynome.service.js#8" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">Polynome</code>
+<a href="/src/polynome.service.js#32" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">Polynome</code>
 <div><span class="hint">service in module <code ng:non-bindable="">BeerToolbox</code>
 </span>
 </div>
@@ -7,7 +7,7 @@
 <div class="description"><div class="beertoolbox-polynome-page"><p>Perform basic operations on a polynome, including solve</p>
 </div></div>
 <div class="member method"><h2 id="methods">Methods</h2>
-<ul class="methods"><li><a href="/src/polynome.service.js#27" class="view-source icon-eye-open"> </a><h3 id="methods_polynome">Polynome(polynomeObj)</h3>
+<ul class="methods"><li><a href="/src/polynome.service.js#51" class="view-source icon-eye-open"> </a><h3 id="methods_polynome">Polynome(polynomeObj)</h3>
 <div class="polynome"><div class="polynome-page"><p>Constructor</p>
 </div><h5 id="methods_polynome_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>polynomeObj</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="polynome-page"><p>Polynome; ie <pre class="prettyprint linenums">
 {
@@ -18,29 +18,29 @@
 }</pre>
 </div></td></tr></tbody></table></div>
 </li>
-<li><a href="/src/polynome.service.js#100" class="view-source icon-eye-open"> </a><h3 id="methods_direct">direct(value)</h3>
+<li><a href="/src/polynome.service.js#124" class="view-source icon-eye-open"> </a><h3 id="methods_direct">direct(value)</h3>
 <div class="direct"><div class="direct-page"><p>Inject th value in the polynome </p>
 </div><h5 id="methods_direct_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>value</td><td><a href="" class="label type-hint type-hint-integer">Integer</a><a href="" class="label type-hint type-hint-float">float</a></td><td><div class="direct-page"><p>Value to pass to the polynome</p>
 </div></td></tr></tbody></table><h5 id="methods_direct_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">float</a></td><td><div class="direct-page"><p>Solution</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/polynome.service.js#85" class="view-source icon-eye-open"> </a><h3 id="methods_invert">invert(value)</h3>
-<div class="invert"><div class="invert-page"><p>Solve th polynome</p>
+<li><a href="/src/polynome.service.js#109" class="view-source icon-eye-open"> </a><h3 id="methods_invert">invert(value)</h3>
+<div class="invert"><div class="invert-page"><p>Solve the polynome</p>
 </div><h5 id="methods_invert_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>value</td><td><a href="" class="label type-hint type-hint-integer">Integer</a><a href="" class="label type-hint type-hint-float">float</a></td><td><div class="invert-page"><p>Value to pass to the polynome</p>
 </div></td></tr></tbody></table><h5 id="methods_invert_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="invert-page"><p>Solution</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="/src/polynome.service.js#60" class="view-source icon-eye-open"> </a><h3 id="methods_solve">solve(polynomeObj, value)</h3>
-<div class="solve"><div class="solve-page"><p>Solve a polynome equation a3.x^3 + a2.x^2 + a1.x + a0 = value</p>
-</div><h5 id="methods_solve_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>polynomeObj</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="solve-page"><p>Polynome; ie <pre class="prettyprint linenums">
+<li><a href="/src/polynome.service.js#84" class="view-source icon-eye-open"> </a><h3 id="methods_solveeq">solveEq(polynomeObj, value)</h3>
+<div class="solveeq"><div class="solveeq-page"><p>Solve a polynome equation a3.x^3 + a2.x^2 + a1.x + a0 = value</p>
+</div><h5 id="methods_solveeq_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>polynomeObj</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="solveeq-page"><p>Polynome; ie <pre class="prettyprint linenums">
 {
     a0 : 1, 
     a1 : 5, 
     a2 : 6, 
     a3 : 9
 }</pre>
-</div></td></tr><tr><td>value</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="solve-page"><p>Value in the equation a3.x^3 + a2.x^2 + a1.x + a0 = value</p>
-</div></td></tr></tbody></table><h5 id="methods_solve_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="solve-page"><p>Set of solutions</p>
+</div></td></tr><tr><td>value</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="solveeq-page"><p>Value in the equation a3.x^3 + a2.x^2 + a1.x + a0 = value</p>
+</div></td></tr></tbody></table><h5 id="methods_solveeq_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="solveeq-page"><p>Set of solutions</p>
 </div></td></tr></table></div>
 </li>
 </ul>

@@ -1,4 +1,53 @@
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
 angular.module('BeerToolbox', []);
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
+
 /** 
  * @ngdoc service
  * @name BeerToolbox.BeerColor
@@ -27,20 +76,46 @@ angular.module('BeerToolbox').service('BeerColor',
      * 
      * @return {Object} color of the beer
      **/ 
-    Recipe.prototype.estimateColor = function (liquideVol, grains) {
+    this.estimateColor = function (liquideVol, grains) {
         var mcu = 0;
         var lovi;
         grains.forEach(function(grain){
             lovi = UnitsConversion.fromTo(grain.color, 'color.ebc', 'color.lovibond');
-            mcu += 8.34540445202 * lovi * grain.massGr / liquideVol;
+            mcu += 8.34540445202 * lovi * (grain.massGr/1000) / liquideVol;
         });
         var srm = 1.4922 * Math.pow(mcu, 0.6859);
+        var rgb = UnitsConversion.fromTo(srm, 'color.srm', 'color.rgb');
         return {
             srm: srm,
-            rgb: unitsConversionProvider.fromTo(srm, 'color.srm', 'color.rgb')
+            rgb: rgb
         };
     };
 }]);
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
+
 /** 
  * @ngdoc service
  * @name BeerToolbox.BeerSugar
@@ -351,6 +426,30 @@ angular.module('BeerToolbox').service('BeerSugar', ['Polynome', function(Polynom
     };
     
 }]);
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
 /** 
  * @ngdoc service
  * @name BeerToolbox.Ibu
@@ -406,26 +505,66 @@ angular.module('BeerToolbox').service('Ibu',
          * @description
          * Compute IBU
          * 
-         * @param {String} method Computing method
-         * @param  {Array} data   Beer data <pre>
+         * @param  {String} method  Computing method
+         * @param   {Array} data    Beer data <pre>
          * {
          *     alphaAcidity: 4, // alpha acidity of the hop in percent
          *     type: 'pellets', // 'pellets' | 'flowers'
          *     massGr: 50,      // mass of the hop in grams
          *     volumeL: 30,     // volume of liquid in liter
          *     gravitySg: 1.05, // specific gravity of the liquid in Sg
-         *     lastingMin: 60,  //time during which the hops is in the boiling liquide
+         *     lastingMin: 60   // time during which the hops is in the boiling liquide
+         * }</pre>
+         * @param  {Object=} options Options <pre>
+         * {
+         *     precision: 2, // 2 decimals
          * }</pre>
          * 
          * @returns {Float} Ibu
          **/
-        this.compute = function (method, data) {
-            return [0].concat(data).reduce(function (total, next) {
+        this.compute = function (method, data, options) {
+            options = angular.extend(
+                {
+                    precision: null
+                }, 
+                options
+            );
+            var result = [0].concat(data).reduce(function (total, next) {
                 var correction = /^pellet/.test(next.type ? next.type : '') ? 1.1 : 1;
                 return total + ibuComputeMethods[method](correction * next.alphaAcidity / 100, next.massGr, next.volumeL, next.gravitySg, next.lastingMin);
             });
+            if ((options.precision) && ('number' === typeof result)) {
+                var dec = Math.pow(10, options.precision);
+                return Math.round(result * dec) / dec;
+            } else {
+                return result;
+            }
         };
     });
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
 /** 
  * @ngdoc service
  * @name BeerToolbox.Polynome
@@ -455,7 +594,7 @@ angular.module('BeerToolbox').service('Polynome', function(){
     var Polynome = function(polynomeObj) {
         var self = this;
         this.polynomeObj = {};
-        var degrees = [];
+        var degrees = [0];
         Object.keys(polynomeObj).forEach(function(key) {
             var matcher = key.match(/[a-zA-Z_\.\-]*(\d+)/);
             if (matcher) {
@@ -464,12 +603,12 @@ angular.module('BeerToolbox').service('Polynome', function(){
                 self.polynomeObj[degree] = parseFloat(polynomeObj[key]);
             }
         });
-        this.size = Math.max.apply(degrees);
+        this.size = Math.max.apply(null, degrees) + 1;
     };
     
     /**
      * @ngdoc method
-     * @name solve
+     * @name solveEq
      * @methodOf BeerToolbox.Polynome
      * @module BeerToolbox
      * @description
@@ -485,16 +624,16 @@ angular.module('BeerToolbox').service('Polynome', function(){
      * 
      * @return {Array} Set of solutions
      **/
-    Polynome.prototype.solve = function(value) {
+    Polynome.prototype.solveEq = function(value) {
         switch (this.size) {
             case 1:
                 return [];
             case 2:
-                return firstDegree(polynomeObj, value);
+                return firstDegree(this.polynomeObj, value);
             case 3:
-                return secondDegree(polynomeObj, value);
+                return secondDegree(this.polynomeObj, value);
             case 4:
-                return thirdDegree(polynomeObj, value);
+                return thirdDegree(this.polynomeObj, value);
             default:
                 return [];
         }
@@ -506,12 +645,12 @@ angular.module('BeerToolbox').service('Polynome', function(){
      * @methodOf BeerToolbox.Polynome
      * @module BeerToolbox
      * @description
-     * Solve th polynome
+     * Solve the polynome
      * @param   {Integer|float} value Value to pass to the polynome
      * @returns {Float} Solution
      */
     Polynome.prototype.invert = function(value){
-        var result = this.solve(value);
+        var result = this.solveEq(value);
         return result.length ? result[0] : null;
     };
     
@@ -528,8 +667,8 @@ angular.module('BeerToolbox').service('Polynome', function(){
     Polynome.prototype.direct = function(value) {
         var self = this;
         var result = 0;
-        Object.key(this.polynomeObj).forEach(function(degree) {
-            result += self.polynomeObj[dregree] * Math.pow(value, degree);
+        Object.keys(this.polynomeObj).forEach(function(degree) {
+            result += self.polynomeObj[degree] * Math.pow(value, degree);
         });
         return result;
     };
@@ -542,9 +681,9 @@ angular.module('BeerToolbox').service('Polynome', function(){
      * 
      * @return {Array}
      **/ 
-    var firstDegre = function(polynomeObj, value) {
-        if (polynomeObj[1] !== 0) {
-            return [(value - polynomeObj[0]) / polynomeObj[1]];
+    var firstDegree = function(polynomeObj, value) {
+        if (polynomeObj[1]) {
+            return [(value - (polynomeObj[0] ? polynomeObj[0] : 0)) / polynomeObj[1]];
         } else {
             return [];
         }
@@ -558,7 +697,7 @@ angular.module('BeerToolbox').service('Polynome', function(){
      * 
      * @return {Array}
      **/ 
-    var secondDegre = function(polynomeObj, value) {
+    var secondDegree = function(polynomeObj, value) {
         var delta = Math.pow(polynomeObj[1], 2) - 4 *(polynomeObj[0] - value) * polynomeObj[2];
         if (delta<0) {
             return [];
@@ -624,6 +763,30 @@ angular.module('BeerToolbox').service('Polynome', function(){
     
     return Polynome;
 });
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
 /** 
  * @ngdoc service
  * @name BeerToolbox.UnitsConversion
@@ -637,7 +800,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
     
         var unitDecoder = /(([\w-]*)\.)?(.*)/;
 
-        this.prototype.data = {
+        this.data = {
             temperature: {
                 celcius: new Polynome({ // kelvin -> celcius
                     a0: -273.15,
@@ -663,14 +826,14 @@ angular.module('BeerToolbox').service('UnitsConversion',
                     a1: 0.374734
                 }),
                 mcu: {
-                    compute: function (ebc) {
+                    direct: function (ebc) {
                         if (ebc / 1.97 >= 10) {
                             return (ebc / 1.97 - (50 / 7)) * 3.5;
                         } else {
                             return 10 - Math.sqrt(100.0 - ebc * 5.0761421);
                         }
                     },
-                    solve: function (mcu) {
+                    invert: function (mcu) {
                         if (mcu >= 10) {
                             return 3.94 * (mcu + 25) / 7;
                         } else {
@@ -679,7 +842,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
                     }
                 },
                 rgb: {
-                    compute: function (ebc) {
+                    direct: function (ebc) {
                         var toHex = function (i) {
                             var s = '00' + i.toString(16);
                             return s.substring(s.length - 2);
@@ -689,7 +852,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
                         var b = Math.round(Math.min(255, Math.max(0, 220 * Math.pow(0.7, ebc / 1.97))));
                         return '#' + toHex(r) + toHex(g) + toHex(b);
                     },
-                    solve: function (rgb) {
+                    invert: function (rgb) {
                         /*var color = rgb.match(/#(.{2})(.{2})(.{2})/);
                         if (color.length === 4) {
                             var r = parseInt(color[1], 16);
@@ -793,7 +956,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
          * 
          * @return {Float} Converted value
          **/ 
-        this.prototype.fromTo = function (value, from, to, options) {
+        this.fromTo = function (value, from, to, options) {
             var UnitException = function (origin, message) {
                 this.origin = origin;
                 this.message = message;
@@ -823,13 +986,13 @@ angular.module('BeerToolbox').service('UnitsConversion',
             if (!this.data[options.type][unitTo]) {
                 throw new UnitException('to', 'Unit ' + unitTo + ' does not exist for type ' + options.type);
             }
-            var SiValue = this.data[options.type][unitFrom].solve(value);
-            if ('number' !== typeof value) {
+            var siValue = this.data[options.type][unitFrom].invert(value);
+            if ('number' !== typeof siValue) {
                 throw new UnitException('from', 'Value ' + value + ' is out of bounce in unit ' + unitFrom + ', type ' + options.type);
             }
-            var result = this.data[options.type][unitTo].compute(SiValue);
-            if ((precision) && ('number' === typeof result)) {
-                var dec = Math.pow(10, precision);
+            var result = this.data[options.type][unitTo].direct(siValue);
+            if ((options.precision) && ('number' === typeof result)) {
+                var dec = Math.pow(10, options.precision);
                 return Math.round(result * dec) / dec;
             } else {
                 return result;
@@ -846,7 +1009,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
          * 
          * @return {Float} Units description array
          **/
-        this.prototype.getPhysicalUnits = function () {
+        this.getPhysicalUnits = function () {
             var self = this;
             return Object.keys(this.data).map(function(type) {
                 return {

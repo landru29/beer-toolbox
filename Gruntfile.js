@@ -94,6 +94,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dist', [
         'jshint:dev',
         'clean:dist',
+        'test',
         'ngdocs',
         'concat:dist',
         'ngAnnotate:dist',

@@ -1,3 +1,27 @@
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
 /** 
  * @ngdoc service
  * @name BeerToolbox.Ibu
@@ -53,23 +77,39 @@ angular.module('BeerToolbox').service('Ibu',
          * @description
          * Compute IBU
          * 
-         * @param {String} method Computing method
-         * @param  {Array} data   Beer data <pre>
+         * @param  {String} method  Computing method
+         * @param   {Array} data    Beer data <pre>
          * {
          *     alphaAcidity: 4, // alpha acidity of the hop in percent
          *     type: 'pellets', // 'pellets' | 'flowers'
          *     massGr: 50,      // mass of the hop in grams
          *     volumeL: 30,     // volume of liquid in liter
          *     gravitySg: 1.05, // specific gravity of the liquid in Sg
-         *     lastingMin: 60,  //time during which the hops is in the boiling liquide
+         *     lastingMin: 60   // time during which the hops is in the boiling liquide
+         * }</pre>
+         * @param  {Object=} options Options <pre>
+         * {
+         *     precision: 2, // 2 decimals
          * }</pre>
          * 
          * @returns {Float} Ibu
          **/
-        this.compute = function (method, data) {
-            return [0].concat(data).reduce(function (total, next) {
+        this.compute = function (method, data, options) {
+            options = angular.extend(
+                {
+                    precision: null
+                }, 
+                options
+            );
+            var result = [0].concat(data).reduce(function (total, next) {
                 var correction = /^pellet/.test(next.type ? next.type : '') ? 1.1 : 1;
                 return total + ibuComputeMethods[method](correction * next.alphaAcidity / 100, next.massGr, next.volumeL, next.gravitySg, next.lastingMin);
             });
+            if ((options.precision) && ('number' === typeof result)) {
+                var dec = Math.pow(10, options.precision);
+                return Math.round(result * dec) / dec;
+            } else {
+                return result;
+            }
         };
     });

@@ -1,3 +1,27 @@
+/**
+ * The MIT License (MIT)
+ * 
+ * Copyright (c) 2014 landru29
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **/
+
 /** 
  * @ngdoc service
  * @name BeerToolbox.UnitsConversion
@@ -11,7 +35,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
     
         var unitDecoder = /(([\w-]*)\.)?(.*)/;
 
-        this.prototype.data = {
+        this.data = {
             temperature: {
                 celcius: new Polynome({ // kelvin -> celcius
                     a0: -273.15,
@@ -37,14 +61,14 @@ angular.module('BeerToolbox').service('UnitsConversion',
                     a1: 0.374734
                 }),
                 mcu: {
-                    compute: function (ebc) {
+                    direct: function (ebc) {
                         if (ebc / 1.97 >= 10) {
                             return (ebc / 1.97 - (50 / 7)) * 3.5;
                         } else {
                             return 10 - Math.sqrt(100.0 - ebc * 5.0761421);
                         }
                     },
-                    solve: function (mcu) {
+                    invert: function (mcu) {
                         if (mcu >= 10) {
                             return 3.94 * (mcu + 25) / 7;
                         } else {
@@ -53,7 +77,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
                     }
                 },
                 rgb: {
-                    compute: function (ebc) {
+                    direct: function (ebc) {
                         var toHex = function (i) {
                             var s = '00' + i.toString(16);
                             return s.substring(s.length - 2);
@@ -63,7 +87,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
                         var b = Math.round(Math.min(255, Math.max(0, 220 * Math.pow(0.7, ebc / 1.97))));
                         return '#' + toHex(r) + toHex(g) + toHex(b);
                     },
-                    solve: function (rgb) {
+                    invert: function (rgb) {
                         /*var color = rgb.match(/#(.{2})(.{2})(.{2})/);
                         if (color.length === 4) {
                             var r = parseInt(color[1], 16);
@@ -167,7 +191,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
          * 
          * @return {Float} Converted value
          **/ 
-        this.prototype.fromTo = function (value, from, to, options) {
+        this.fromTo = function (value, from, to, options) {
             var UnitException = function (origin, message) {
                 this.origin = origin;
                 this.message = message;
@@ -197,13 +221,13 @@ angular.module('BeerToolbox').service('UnitsConversion',
             if (!this.data[options.type][unitTo]) {
                 throw new UnitException('to', 'Unit ' + unitTo + ' does not exist for type ' + options.type);
             }
-            var SiValue = this.data[options.type][unitFrom].solve(value);
-            if ('number' !== typeof value) {
+            var siValue = this.data[options.type][unitFrom].invert(value);
+            if ('number' !== typeof siValue) {
                 throw new UnitException('from', 'Value ' + value + ' is out of bounce in unit ' + unitFrom + ', type ' + options.type);
             }
-            var result = this.data[options.type][unitTo].compute(SiValue);
-            if ((precision) && ('number' === typeof result)) {
-                var dec = Math.pow(10, precision);
+            var result = this.data[options.type][unitTo].direct(siValue);
+            if ((options.precision) && ('number' === typeof result)) {
+                var dec = Math.pow(10, options.precision);
                 return Math.round(result * dec) / dec;
             } else {
                 return result;
@@ -220,7 +244,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
          * 
          * @return {Float} Units description array
          **/
-        this.prototype.getPhysicalUnits = function () {
+        this.getPhysicalUnits = function () {
             var self = this;
             return Object.keys(this.data).map(function(type) {
                 return {
