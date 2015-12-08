@@ -11,7 +11,7 @@ describe('Beer color service', function () {
         var color = BeerColorService.estimateColor(
             40, [
                 {
-                    massGr: 8000,
+                    mass: 8,
                     color: 50
                 }
             ]

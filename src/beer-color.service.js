@@ -56,7 +56,7 @@ angular.module('BeerToolbox').service('BeerColor',
         var lovi;
         grains.forEach(function(grain){
             lovi = UnitsConversion.fromTo(grain.color, 'color.ebc', 'color.lovibond');
-            mcu += 8.34540445202 * lovi * (grain.massGr/1000) / liquideVol;
+            mcu += 8.34540445202 * lovi * (grain.mass) / liquideVol;
         });
         var srm = 1.4922 * Math.pow(mcu, 0.6859);
         var rgb = UnitsConversion.fromTo(srm, 'color.srm', 'color.rgb');
