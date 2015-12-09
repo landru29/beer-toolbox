@@ -80,7 +80,7 @@ module.exports = function (grunt) {
                 startPage: '/api',
                 title: "BeerToolbox Documentation",
                 titleLink: "/api",
-                sourceLink: '/{{file}}#{{codeline}}'
+                sourceLink: 'https://github.com/landru29/beer-toolbox/blob/master/{{file}}#L{{codeline}}'
             },
             api: {
                 title: 'Library',
