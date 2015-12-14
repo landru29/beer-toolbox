@@ -1014,7 +1014,7 @@ angular.module('BeerToolbox').service('UnitsConversion',
          **/
         this.getPhysicalUnits = function (unitType) {
             var self = this;
-            if (!type) {
+            if (!unitType) {
 				return Object.keys(this.data).map(function(type) {
 					return {
 						type: type,
@@ -1031,7 +1031,10 @@ angular.module('BeerToolbox').service('UnitsConversion',
 				Object.keys(this.data).forEach(function(type) {
 					Object.keys(self.data[type]).forEach(function(unit) {
 						if (unitType === type + '.' + unit) {
-							result = unit;
+							result = {
+								name: unit,
+								type: type + '.' + unit
+							};
 						}
 					});
 				});
