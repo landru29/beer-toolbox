@@ -239,24 +239,40 @@ angular.module('BeerToolbox').service('UnitsConversion',
          * @name getPhysicalUnits
          * @methodOf BeerToolbox.UnitsConversion
          * @module BeerToolbox
+         * @param  {String=} type  Optional unitType (ie 'mass.g')
          * @description
          * Get the list of available units
          * 
-         * @return {Float} Units description array
+         * @return {Array|Object} Units description array, or the found type
          **/
-        this.getPhysicalUnits = function () {
+        this.getPhysicalUnits = function (unitType) {
             var self = this;
-            return Object.keys(this.data).map(function(type) {
-                return {
-                    type: type,
-                    units: Object.keys(self.data[type]).map(function(unit) {
-                        return {
-                            name: unit,
-                            id: type + '.' + unit
-                        };
-                    })
-                };
-            });
+            if (!unitType) {
+				return Object.keys(this.data).map(function(type) {
+					return {
+						type: type,
+						units: Object.keys(self.data[type]).map(function(unit) {
+							return {
+								name: unit,
+								type: type + '.' + unit
+							};
+						})
+					};
+				});
+			} else {
+				var result;
+				Object.keys(this.data).forEach(function(type) {
+					Object.keys(self.data[type]).forEach(function(unit) {
+						if (unitType === type + '.' + unit) {
+							result = {
+								name: unit,
+								type: type + '.' + unit
+							};
+						}
+					});
+				});
+				return result;
+			}
         };
     
         /**

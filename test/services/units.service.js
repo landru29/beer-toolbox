@@ -52,5 +52,14 @@ describe('Unit conversion service', function () {
             UnitsConversion.fromTo(35, 'sugar.plato', 'sugar.brix', {precision:2})
         ).toEqual(35.06, 'plato -> brix');
     });
+    
+    it('Should retrieve unit', function () {
+		var unit = UnitsConversion.getPhysicalUnits('mass.g');
+        expect(unit.type).toBeDefined();
+        var units = UnitsConversion.getPhysicalUnits();
+        for (var type in units) {
+			expect(units[type].type).toBeDefined();
+		}
+    });
 
 });

@@ -46,7 +46,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "BeerToolbox",
       "shortDescription": "Units conversions",
-      "keywords": "api array beertoolbox coeficients conversions convert converted convertion current description destination fromto getphysicalunits list method options polynome polynomecoef precision register registerconversion service type unit units unitsconversion"
+      "keywords": "api array beertoolbox coeficients conversions convert converted convertion current description destination fromto getphysicalunits list mass method optional options polynome polynomecoef precision register registerconversion service type unit units unitsconversion unittype"
     }
   ],
   "apis": {
