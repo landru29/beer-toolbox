@@ -7,7 +7,13 @@
 <div class="description"><div class="beertoolbox-unitsconversion-page"><p>Units conversions</p>
 </div></div>
 <div class="member method"><h2 id="methods">Methods</h2>
-<ul class="methods"><li><a href="https://github.com/landru29/beer-toolbox/blob/master/src/units.service.js#L194" class="view-source icon-eye-open"> </a><h3 id="methods_fromto">fromTo(value, from, to, options)</h3>
+<ul class="methods"><li><a href="https://github.com/landru29/beer-toolbox/blob/master/src/units.service.js#L249" class="view-source icon-eye-open"> </a><h3 id="methods_decodetype">decodeType(type)</h3>
+<div class="decodetype"><div class="decodetype-page"><p>Decode a unit type</p>
+</div><h5 id="methods_decodetype_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>type</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="decodetype-page"><p>unitType (ie &#39;mass.g&#39; or &#39;mass&#39;)</p>
+</div></td></tr></tbody></table><h5 id="methods_decodetype_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="decodetype-page"><p>decoded unit {type, name}</p>
+</div></td></tr></table></div>
+</li>
+<li><a href="https://github.com/landru29/beer-toolbox/blob/master/src/units.service.js#L194" class="view-source icon-eye-open"> </a><h3 id="methods_fromto">fromTo(value, from, to, options)</h3>
 <div class="fromto"><div class="fromto-page"><p>Convert units</p>
 </div><h5 id="methods_fromto_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>value</td><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="fromto-page"><p>Value to convert</p>
 </div></td></tr><tr><td>from</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="fromto-page"><p>Current unit (type.unit)</p>
@@ -16,13 +22,13 @@
 </div></td></tr></tbody></table><h5 id="methods_fromto_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-float">Float</a></td><td><div class="fromto-page"><p>Converted value</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="https://github.com/landru29/beer-toolbox/blob/master/src/units.service.js#L248" class="view-source icon-eye-open"> </a><h3 id="methods_getphysicalunits">getPhysicalUnits(type)</h3>
+<li><a href="https://github.com/landru29/beer-toolbox/blob/master/src/units.service.js#L279" class="view-source icon-eye-open"> </a><h3 id="methods_getphysicalunits">getPhysicalUnits(type)</h3>
 <div class="getphysicalunits"><div class="getphysicalunits-page"><p>Get the list of available units</p>
 </div><h5 id="methods_getphysicalunits_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>type <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="getphysicalunits-page"><p>Optional unitType (ie &#39;mass.g&#39;)</p>
 </div></td></tr></tbody></table><h5 id="methods_getphysicalunits_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array|Object</a></td><td><div class="getphysicalunits-page"><p>Units description array, or the found type</p>
 </div></td></tr></table></div>
 </li>
-<li><a href="https://github.com/landru29/beer-toolbox/blob/master/src/units.service.js#L289" class="view-source icon-eye-open"> </a><h3 id="methods_registerconversion">registerConversion(polynomeCoef, unit, type)</h3>
+<li><a href="https://github.com/landru29/beer-toolbox/blob/master/src/units.service.js#L333" class="view-source icon-eye-open"> </a><h3 id="methods_registerconversion">registerConversion(polynomeCoef, unit, type)</h3>
 <div class="registerconversion"><div class="registerconversion-page"><p>Register a new convertion</p>
 </div><h5 id="methods_registerconversion_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>polynomeCoef</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="registerconversion-page"><p>Polynome coeficients</p>
 </div></td></tr><tr><td>unit</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="registerconversion-page"><p>Unit (type.unit | unit)</p>

@@ -1,18 +1,18 @@
 /**
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2014 landru29
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,7 +22,7 @@
  * SOFTWARE.
  **/
 
-/** 
+/**
  * @ngdoc service
  * @name BeerToolbox.UnitsConversion
  * @module BeerToolbox
@@ -32,8 +32,8 @@
 angular.module('BeerToolbox').service('UnitsConversion',
     function (Polynome) {
         'use strict';
-    
-        var unitDecoder = /(([\w-]*)\.)?(.*)/;
+
+        var unitDecoder = /(([\w-]+)\.)?(.*)/;
 
         this.data = {
             temperature: {
@@ -183,32 +183,33 @@ angular.module('BeerToolbox').service('UnitsConversion',
          * @module BeerToolbox
          * @description
          * Convert units
-         * 
+         *
          * @param   {Float} value   Value to convert
          * @param  {String} from    Current unit (type.unit)
          * @param  {String} to      Destination unit (type.unit)
          * @param {Object=} options Options (type, precision)
-         * 
+         *
          * @return {Float} Converted value
-         **/ 
+         **/
         this.fromTo = function (value, from, to, options) {
             var UnitException = function (origin, message) {
                 this.origin = origin;
                 this.message = message;
             };
-            
-            var decodeFrom = from.match(unitDecoder);
-            var decodeTo = to.match(unitDecoder);
-            var unitTo = decodeTo[3];
-            var unitFrom = decodeFrom[3];
-            
+
+
+            var decodeFrom = this.decodeType(from);
+            var decodeTo =  this.decodeType(to);
+            var unitTo = decodeTo.name;
+            var unitFrom = decodeFrom.name;
+
             value = ('string' === typeof value) ? parseFloat(value) : value;
 
             options = angular.extend(
                 {
-                    type: decodeFrom[2],
+                    type: decodeFrom.family,
                     precision: null
-                }, 
+                },
                 options
             );
 
@@ -216,10 +217,10 @@ angular.module('BeerToolbox').service('UnitsConversion',
                 throw new UnitException('from', 'Type ' + options.type + ' does not exist in the unit conversion system');
             }
             if (!this.data[options.type][unitFrom]) {
-                throw new UnitException('from', 'Unit ' + unitFrom + ' does not exist for type ' + options.type);
+                throw new UnitException('from', 'Unit ' + unitFrom + ' does not exist for type ' + options.type + '=> from = ' + from);
             }
             if (!this.data[options.type][unitTo]) {
-                throw new UnitException('to', 'Unit ' + unitTo + ' does not exist for type ' + options.type);
+                throw new UnitException('to', 'Unit ' + unitTo + ' does not exist for type ' + options.type + '=> to = ' + to);
             }
             var siValue = this.data[options.type][unitFrom].invert(value);
             if ('number' !== typeof siValue) {
@@ -236,45 +237,88 @@ angular.module('BeerToolbox').service('UnitsConversion',
 
         /**
          * @ngdoc method
+         * @name decodeType
+         * @methodOf BeerToolbox.UnitsConversion
+         * @module BeerToolbox
+         * @param  {String} type  unitType (ie 'mass.g' or 'mass')
+         * @description
+         * Decode a unit type
+         *
+         * @return {Object} decoded unit {type, name}
+         **/
+        this.decodeType = function(type) {
+          if (!type) {
+            return {};
+          }
+          var matcher = type.match(unitDecoder);
+          if (!matcher[3]) {
+            return {
+              family: matcher[2]
+            };
+          }
+          if (matcher[3]) {
+            return {
+              type: matcher[2] + '.' + matcher[3],
+              family: matcher[2],
+              name: matcher[3]
+            };
+          }
+        };
+
+        /**
+         * @ngdoc method
          * @name getPhysicalUnits
          * @methodOf BeerToolbox.UnitsConversion
          * @module BeerToolbox
          * @param  {String=} type  Optional unitType (ie 'mass.g')
          * @description
          * Get the list of available units
-         * 
+         *
          * @return {Array|Object} Units description array, or the found type
          **/
-        this.getPhysicalUnits = function (unitType) {
-            var self = this;
-            if (!unitType) {
-				return Object.keys(this.data).map(function(type) {
-					return {
-						type: type,
-						units: Object.keys(self.data[type]).map(function(unit) {
-							return {
-								name: unit,
-								type: type + '.' + unit
-							};
-						})
-					};
-				});
-			} else {
-				var result;
-				Object.keys(this.data).forEach(function(type) {
-					Object.keys(self.data[type]).forEach(function(unit) {
-						if (unitType === type + '.' + unit) {
-							result = {
-								name: unit,
-								type: type + '.' + unit
-							};
-						}
-					});
-				});
-				return result;
-			}
+        this.getPhysicalUnits = function(unitType) {
+          var self = this;
+          var type = self.decodeType(unitType);
+
+          if (!type.family) {
+            return Object.keys(this.data).map(function(type) {
+              return {
+                type: type,
+                units: Object.keys(self.data[type]).map(function(unit) {
+                  return {
+                    name: unit,
+                    type: type + '.' + unit
+                  };
+                })
+              };
+            });
+          }
+
+          if (!type.name) {
+            return Object.keys(self.data[type.family]).map(function(unit) {
+              return {
+                name: unit,
+                type: type.family + '.' + unit
+              };
+            });
+          }
+
+          if (type.name) {
+            var result;
+            Object.keys(this.data).forEach(function(family) {
+              Object.keys(self.data[family]).forEach(function(unit) {
+                if (type.type === family + '.' + unit) {
+                  result = {
+                    name: unit,
+                    type: family + '.' + unit
+                  };
+                }
+              });
+            });
+            return result;
+          }
         };
-    
+
         /**
          * @ngdoc method
          * @name registerConversion

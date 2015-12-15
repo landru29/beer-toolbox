@@ -19,8 +19,8 @@ describe('Unit conversion service', function () {
             UnitsConversion.fromTo(10, 'mass.t', 'mass.kg')
         ).toEqual(10000, 'g -> mg');
     });
-    
-    
+
+
      it('Should convert volumes', function () {
         expect(
             UnitsConversion.fromTo(10, 'volume.ml', 'volume.l')
@@ -31,9 +31,9 @@ describe('Unit conversion service', function () {
         expect(
             UnitsConversion.fromTo(10, 'volume.l', 'volume.m3')
         ).toEqual(0.01, 'L -> m3');
-        
+
     });
-    
+
     it('Should convert temperatures', function () {
         expect(
             UnitsConversion.fromTo(10, 'temperature.celcius', 'temperature.fahrenheit', {precision:2})
@@ -42,8 +42,8 @@ describe('Unit conversion service', function () {
             UnitsConversion.fromTo(10, 'temperature.kelvin', 'temperature.fahrenheit', {precision:2})
         ).toEqual(-441.67, 'kelvin -> fahrenheit');
     });
-    
-    
+
+
     it('Should convert sugars', function () {
         expect(
             UnitsConversion.fromTo(1.035, 'sugar.sg', 'sugar.plato', {precision:2})
@@ -52,14 +52,24 @@ describe('Unit conversion service', function () {
             UnitsConversion.fromTo(35, 'sugar.plato', 'sugar.brix', {precision:2})
         ).toEqual(35.06, 'plato -> brix');
     });
-    
+
     it('Should retrieve unit', function () {
-		var unit = UnitsConversion.getPhysicalUnits('mass.g');
-        expect(unit.type).toBeDefined();
-        var units = UnitsConversion.getPhysicalUnits();
-        for (var type in units) {
-			expect(units[type].type).toBeDefined();
-		}
+  		var unit = UnitsConversion.getPhysicalUnits('mass.g');
+      expect(unit.type).toBeDefined();
+      var units = UnitsConversion.getPhysicalUnits();
+      for (var type in units) {
+  			expect(units[type].type).toBeDefined();
+  		}
     });
+
+    it('Should decode unit', function () {
+      var unit1 = UnitsConversion.decodeType('mass.kg');
+      expect(unit1.family).toEqual('mass');
+      expect(unit1.name).toEqual('kg');
+      var unit2 = UnitsConversion.decodeType('mass.');
+      expect(unit2.family).toEqual('mass');
+      expect(unit2.name).toBeUndefined();
+    });
+
 
 });
