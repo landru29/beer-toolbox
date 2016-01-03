@@ -1,6 +1,6 @@
 {
   "name": "beer-toolbox",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Beer Toolbox",
   "main": "dist/beer-toolbox.min.js",
   "scripts": {
